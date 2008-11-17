@@ -1,5 +1,5 @@
 # Include this module into your ActiveRecord model.
-Module CssSanitize
+module CssSanitize
 
   def custom_css=(text)
     # Mostly stolen from http://code.sixapart.com/svn/CSS-Cleaner/trunk/lib/CSS/Cleaner.pm
