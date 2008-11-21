@@ -63,9 +63,13 @@ STR
       @site.custom_css = string
       @site.custom_css.should == "Error: invalid/disallowed characters in CSS"
     end
-
+  end
+  
+  
+  it "allows good css" do
     good_strings = [
       ".test { color: red; border: 1px solid brown; }",
+      "h1 { background: url(http://foobar.com/meh.jpg)}",
       "div.foo { width: 500px; height: 200px; }",
       "GI b gkljfl kj { { { ********" # gibberish, but should work.
     ]
@@ -106,11 +110,6 @@ test{ width: expression(alert("sux 2 be u")); }
 a:link { color: red }
 STR
     @site.custom_css.should == "Error: invalid/disallowed characters in CSS"
-  end
-
-  it "allows good css" do
-    @site.custom_css = "a:link { color: red }"
-    @site.custom_css.should == "a:link { color: red }"
   end
 
 end

@@ -3,8 +3,9 @@ module CssSanitize
 
   def custom_css=(text)
     # Mostly stolen from http://code.sixapart.com/svn/CSS-Cleaner/trunk/lib/CSS/Cleaner.pm
-    text = "Error: invalid/disallowed characters in CSS" if text =~ /\w\/\/*/ # a comment immediately following a letter
-    text = "Error: invalid/disallowed characters in CSS" if text =~ /\/\*\// # /*/ --> hack attempt, IMO
+    text = "Error: invalid/disallowed characters in CSS" if text =~ /(\w\/\/)/    # a// comment immediately following a letter
+    text = "Error: invalid/disallowed characters in CSS" if text =~ /(\w\/\/*\*)/ # a/* comment immediately following a letter
+    text = "Error: invalid/disallowed characters in CSS" if text =~ /(\/\*\/)/            # /*/ --> hack attempt, IMO
 
     # Now, strip out any comments, and do some parsing.
     no_comments = text.gsub(/(\/\*.*?\*\/)/, "") # filter out any /* ... */
